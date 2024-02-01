@@ -13,8 +13,6 @@ function psionic_compile()
     git clone --depth=1 https://github.com/psionicprjkt/aarch64-linux-android-4.9 arm64
     git clone --depth=1 https://github.com/psionicprjkt/arm-linux-androideabi-4.9 arm32
 
-
-  
     # compile_kernel
     export ARCH=arm64
     make O=out ARCH=arm64 surya_defconfig
