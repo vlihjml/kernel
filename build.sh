@@ -8,7 +8,10 @@ function psionic_compile()
     rm -rf out AnyKernel AK3-* clang arm64 arm32 && mkdir -p out
 
     # download_resources
-    git clone --depth=1 https://gitlab.com/LeCmnGend/proton-clang.git -b clang-13  clang
+    wget --quiet https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-12.0.0_r12/clang-r416183b1.tar.gz -O "aosp-clang.tar.gz"
+    mkdir clang && tar -xf aosp-clang.tar.gz -C clang && rm -rf aosp-clang.tar.gz
+    git clone --depth=1 https://github.com/psionicprjkt/aarch64-linux-android-4.9 arm64
+    git clone --depth=1 https://github.com/psionicprjkt/arm-linux-androideabi-4.9 arm32
 
 
   
@@ -38,7 +41,7 @@ function psionic_compile()
 function psionic_upload()
 {
     # setup_kernel_release
-    git clone --depth=1 https://github.com/Konjikin/AnyKernel33  AnyKernel
+    git clone --depth=1 https://github.com/Konjikin/AnyKernel3  AnyKernel
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
     cp out/arch/arm64/boot/dtbo.img AnyKernel
     cd AnyKernel
