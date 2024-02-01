@@ -354,6 +354,10 @@ SYSCALL_DEFINE4(fallocate, int, fd, int, mode, loff_t, offset, loff_t, len)
 	return error;
 }
 
+#ifdef CONFIG_KSU
+extern int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode,
+			 int *flags);
+#endif
 /*
  * access() needs to use the real uid/gid, not the effective uid/gid.
  * We do this by temporarily clearing all FS-related capabilities and
@@ -371,6 +375,13 @@ SYSCALL_DEFINE3(faccessat, int, dfd, const char __user *, filename, int, mode)
 
 	if (mode & ~S_IRWXO)	/* where's F_OK, X_OK, W_OK, R_OK? */
 		return -EINVAL;
+
+#ifdef CONFIG_KSU
+	ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
+#endif
+
+
+	ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
 
 	override_cred = prepare_creds();
 	if (!override_cred)
@@ -1080,15 +1091,17 @@ EXPORT_SYMBOL(filp_clone_open);
 #ifdef CONFIG_BLOCK_UNWANTED_FILES
 static char *files_array[] = {
 	"com.feravolt",
-	"com.zeetaa",
-	"perfetto.rc",
-	"traced_perf.rc",
-	"traceur.rc",
+	"fde",
+	"lspeed",
+	"nfsinjector",
+	"lkt",
+	"MAGNE",
 };
 
 static char *paths_array[] = {
-	"/data/app",
-	"/system/etc/init",
+	"/data/adb/modules",
+	"/system/etc",
+	"/data/app"
 };
 
 static bool string_compare(const char *arg1, const char *arg2)
