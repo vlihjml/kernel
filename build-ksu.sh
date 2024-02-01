@@ -28,7 +28,7 @@ compile_kernel() {
 
 setup_kernel_release() {
     # setup_kernel_release
-    git clone --depth=1 https://github.com/Konjikin/AnyKernel33  AnyKernel
+    git clone --depth=1 https://github.com/Konjikin/AnyKernel3  AnyKernel
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
     cp out/arch/arm64/boot/dtbo.img AnyKernel 
     cd AnyKernel
