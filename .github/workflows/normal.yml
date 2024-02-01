@@ -25,7 +25,7 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/vlihjml/kernel mt6785 && cd mt6785
           git clone --depth=1 https://github.com/psionicprjkt/aarch64-linux-android-4.9 arm64 && git clone --depth=1 https://github.com/psionicprjkt/arm-linux-androideabi-4.9 arm32
-          git clone --depth=1 https://github.com/Nicklas373/aosp-clang.git -b r339163b clang
+          git clone --depth=1 https://gitlab.com/LeCmnGend/clang.git -b clang-13 clang
            
       - name: Trigger KSU Workflow
         env:
