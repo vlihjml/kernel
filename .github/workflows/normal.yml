@@ -31,7 +31,7 @@ jobs:
       - name: Trigger KSU Workflow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run ksu.yml --ref R-based
+        run: gh workflow run ksu.yml --ref Q-surya
 
       - name: Disable KernelSU Hooks
         run: |
