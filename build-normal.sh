@@ -5,7 +5,7 @@
 compile_kernel() {
     # compile_kernel
     export ARCH=arm64
-    make O=out ARCH=arm64 RM6785_defconfig
+    make O=out ARCH=arm64 surya_defconfig
     PATH="${PWD}/clang/bin:${PWD}/arm64:${PWD}/arm32:${PATH}" \
     make -j"$(nproc --all)" O=out \
         LLVM=1 \
