@@ -28,9 +28,11 @@ compile_kernel() {
 
 setup_kernel_release() {
     # setup_kernel_release
-    wget --quiet https://psionicprjkt.my.id/assets/files/AK3-RM6785.zip && unzip AK3-RM6785
-    cp out/arch/arm64/boot/Image.gz-dtb AnyKernel && cd AnyKernel
-    zip -r9 "psionic-kernel-RM6785-$(date "+%d%m%Y")-release.zip" *
+    git clone --depth=1 https://github.com/Konjikin/AnyKernel3  AnyKernel
+    cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
+    cp out/arch/arm64/boot/dtbo.img AnyKernel
+    cd AnyKernel
+    zip -r9 "surya-$(date "+%d%m%Y")-release.zip" *
 }
 
 compile_kernel
